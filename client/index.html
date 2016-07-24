@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="./styles/style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" type="text/css">
+    <script data-main="config" src="lib/require.js"></script>
+</head>
+<body>
+
+<div class="authWrapper">
+    <div class="login-page" data-bind="visible:mode()!= 'authenticated'">
+        <div class="form">
+            <form class="register-form">
+                <input type="text" placeholder="name"/>
+                <input type="password" placeholder="password"/>
+                <input type="text" placeholder="email address"/>
+                <button>create</button>
+                <p class="message">Already registered? <a href="#">Sign In</a></p>
+            </form>
+            <form class="login-form">
+                <input type="text" placeholder="username" data-bind="textInput:userName"/>
+                <input type="password" placeholder="password" data-bind="textInput:password"/>
+                <input type="password" placeholder="Confirm Password" data-bind="visible:(mode() =='register'), textInput:confirmPassword"/>
+                <button data-bind="visible:(mode()==='login'),click:login">login</button>
+                <button data-bind="visible:(mode() ==='register'),click:register">Register</button>
+                <p class="message" data-bind="click:switchToRegisterMode,visible:(mode() === 'login')">Not registered? <a href="#">Create an account</a></p>
+                <p class="message" data-bind="click:switchToLoginMode,visible:(mode() === 'register')">Already registered? <a href="#">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="mainPage" data-bind="visible:mode() === 'authenticated',handleHeightOfElements:''">
+
+        <div class="header">
+            <div>
+                <i class="fa fa-comments-o" aria-hidden="true"></i>
+                Yet another chat app
+                <sub style="font-size: 12px;">It sucks!</sub>
+
+            </div>
+        </div>
+        <div class="mainBody">
+            <div class="users">
+
+              <div class="usersHeader">  All users</div>
+                <div data-bind="foreach:userList" class="userWrapper">
+                    <div class="user" data-bind="click:$root.changeActivePartner.bind($root,$data)">
+                        <span data-bind="text:$data.userName,css:{onlineUser:$data.online()}">
+                        </span>
+                        <sub data-bind="visible:$data.online()" style="font-size:11px">
+                           (<span style="color:green">Online</span>)
+                            </sub>
+                        </div>
+                    </div>
+            </div>
+            <div class="commentBoxWrapper">
+                <div class="userBand">
+                    <div class="userBandName">
+                        Dummy Name
+                    </div>
+                </div>
+                <div class="textBox">
+                    <textarea data-bind="textInput:textAreaContent,event:{keydown:handleKeydown}"></textarea>
+                    <span class="sendButton">
+                <i class="fa fa-paper-plane" style="margin-left: 16px;" aria-hidden="true"></i>
+                </span>
+                </div>
+
+                <div class="commentList" data-bind="scrollOnComment:''">
+                    <div data-bind="foreach:commentList">
+                        <div class="comment">
+                    <div class="commentWrapper" data-bind="css:{selfComment:$root.userName() == $data.sender,otherComment:$root.userName()!==$data.sender}">
+                        <div class="commentTitle" data-bind="text:$data.title">
+                        </div>
+                        <div class="commentTime" data-bind="text:$data.createdAt">
+                        </div>
+                        </div>
+                            </div>
+                    </div>
+                </div>
+
+
+            </div>
+         </div>
+    </div>
+</div>
+</body>
+</html>
