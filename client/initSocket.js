@@ -12,7 +12,7 @@ define(['socket'],function(socket){
         }
         console.log( window.counterrr);
 
-        return socket.connect("http://localhost:20000");
+        return socket.connect("http://35.154.27.20:20000");
     }
     return initSocket();
 })
