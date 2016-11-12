@@ -14,7 +14,7 @@ var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var dbInstance,userDetailCollection;
 
-var mongoUrl = 'mongodb://localhost:20001/test';
+var mongoUrl = 'mongodb://localhost:27010/test';
 
 server.listen('20000',function(){
     console.log(static);
