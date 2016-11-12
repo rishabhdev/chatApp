@@ -36,6 +36,8 @@ app.post('/getCommentsForUserPair',getCommentsForUserPair);
 
 
 MongoClient.connect(mongoUrl, function(err, db) {
+    console.log('mongoCon',err);
+    
         dbInstance=db;
         console.log("Connected correctly to mongo db.");
 });
